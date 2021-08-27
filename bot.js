@@ -144,7 +144,9 @@ async function fillBilling(page){
     await input3.type(state);   //types out the state's name
     await input3.type('\n');    //uses the 'new line'/enter key to select state from dropdown
     const deliveryButton = await page.$(delivery); //identifies the "continue" button on the address page 
-    await deliveryButton.click(); //ready for item to be delivered 
+    await deliveryButton.click(); //ready for item to be delivered
+    await page.waitFor(200); //wait 200 milliseconds for page to load
+    await page.evaluate(() => document.getElementsByClassName('button-wrapper')[0].click());
 }
 
 async function checkout(){ //master method that calls everything else
