@@ -53,11 +53,9 @@ async function addToCart(page){
     await page.goto(product_url); //redirects to the product url
 
     //reduces bugs by waiting for your code to fully render
-    // EXTRANEOUS: await page.waitForSelector("button[class='button spin-button prod-ProductCTA--primary button--primary']", elem => elem.click());
     await page.waitForSelector(selectItem);
 
     //the bot will click this element on the product url page
-    // EXTRANEOUS: await page.click("button[class='button spin-button prod-ProductCTA--primary button--primary']", elem => elem.click());
     await page.click(selectItem, elem => elem.click());
 
     //waits for the page to load: EXTRA safety
@@ -111,7 +109,6 @@ async function addToCart2(page){
     await page.waitFor(2000);
 
     //waits for the page to LOAD COMPLETELY and then clicks the first button on the page: account2
-    //EXTRANEOUS: await page.evaluate(() => document.getElementsByClassName(account2)[0].click());
     await page.evaluate(() => document.getElementsByClassName('button m-margin-top width-full button--primary')[0].click());
 
     //waits for the page to load: EXTRA safety
@@ -121,7 +118,6 @@ async function addToCart2(page){
     await page.waitFor(1000);
 
     //waits for the page to LOAD COMPLETELY and then clicks the first button on the page: shipping2
-    // EXTRANEOUS: await page.evaluate(() => document.getElementsByClassName(shipping2)[0].click());
     await page.evaluate(() => document.getElementsByClassName('button cxo-continue-btn button--primary')[0].click());
 }
 
