@@ -16,15 +16,15 @@ const firstName = 'Jack';
 const lastNameField = "input[id='lastName']";
 const lastName = 'Johnson';
 const addressField = "input[id='addressLineOne']";
-const address = "123 Main Street";
+const address = "50 West 4th Street";
 const phoneField = '#phone';
 const phone = '4253948608';
 const emailField = '#email';
 const email = 'jackjohnson@gmail.com';
 const cityField = "input[id='city']";
-const city = "New York City";
+const city = "New York";
 const zipField = "input[id='postalCode']";
-const zip = '10307';
+const zip = '10012';
 const stateField = "select[id='state']";
 const state = 'New York';
 
@@ -147,11 +147,12 @@ async function fillBilling(page){
     const deliveryButton = await page.$(delivery); //identifies the "continue" button on the address page 
     await deliveryButton.click(); //ready for item to be delivered
     await page.waitFor(1500); //wait 200 milliseconds for page to load
+    // await page.$eval(confirmAddress, elem => elem.click());
     const button = await page.$(confirmAddress);
 
     //sam's console.log suggestions
-    console.log(document.getElementsByClassName('button-wrapper'))
-    console.log(document.getElementsByClassName('button-wrapper')[0])
+    // console.log(document.getElementsByClassName('button-wrapper'))
+    // console.log(document.getElementsByClassName('button-wrapper')[0])
 }
 
 async function checkout(){ //master method that calls everything else
