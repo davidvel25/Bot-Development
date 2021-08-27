@@ -2,9 +2,6 @@
 const puppeteer = require('puppeteer');
 
 //the url of the product that will the code will redirect page to
-//best buy product: "https://www.bestbuy.com/site/sony-alpha-7s-iii-full-frame-mirrorless-camera-body-only/6423589.p?skuId=6423589";
-//best buy selectItem: "button[class='btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button']";
-//best buy checkout: "button[class='btn btn-lg btn-block btn-primary']";
 const product_url = "https://www.walmart.com/ip/Sony-Alpha-a7S-III-Mirrorless-Digital-Camera-Body-with-2X-Sony-256GB-SF-M-T2-UHS-II-SDXC-Memory-Cards/158183972";
 const selectItem = "button[class='button spin-button prod-ProductCTA--primary button--primary']";
 const chkt = "button[class='button ios-primary-btn-touch-fix hide-content-max-m checkoutBtn button--primary']";
