@@ -10,6 +10,7 @@ const selectItem = "button[class='button spin-button prod-ProductCTA--primary bu
 const chkt = "button[class='button ios-primary-btn-touch-fix hide-content-max-m checkoutBtn button--primary']";
 const account = "button[data-automation-id='new-guest-continue-button']";
 const shipping = "button[data-automation-id='fulfillment-continue']";
+const delivery = "button[data-automation-id='address-book-action-buttons-on-continue']";
 const account2 = 'button m-margin-top width-full button--primary';
 const shipping2 = 'button cxo-continue-btn button--primary';
 const firstNameField = "input[id='firstName']";
@@ -26,6 +27,8 @@ const cityField = "input[id='city']";
 const city = "New York City";
 const zipField = "input[id='postalCode']";
 const zip = '10307';
+const stateField = "select[id='state']";
+const state = "New York";
 
 async function givePage(){ //function givePage: user can interact with
     //headlessTrue means you won't see browser popup aka quicker + you see the BTS
@@ -146,13 +149,17 @@ async function fillBilling(page){
     // await page.type("input[id='state']", 'NY');
 
     // await input3.click({clickCount:1});
-    await page.waitForNavigation();
+    //await page.waitForNavigation();
     // const input3 = await page.$("button[class='field-input field-input--primary']", elem => elem.click());
-    const input3 = await page.$("button [data-automation-id='address-form-state']", elem => elem.click());
+    const input3 = await page.$(stateField);
+    await input3.click();
     // await page.click("button [data-automation-id='address-form-state']");
     // await page.waitForSelector("button[class='field-input field-input--primary']");
     // await page.click("button[class='field-input field-input--primary']", elem => elem.click());
-    await input3.type('NY');
+    await input3.type('New York');
+    await input3.type('\n');
+    const deliveryButton = await page.$(delivery);
+    await deliveryButton.click();
 }
 
 async function checkout(){ //master method that calls everything else
