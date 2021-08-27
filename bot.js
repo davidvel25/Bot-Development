@@ -149,6 +149,7 @@ async function fillBilling(page){
     await page.waitFor(1500); //wait 200 milliseconds for page to load
     const button = await page.$(confirmAddress);
 
+    //sam's console.log suggestions
     console.log(document.getElementsByClassName('button-wrapper'))
     console.log(document.getElementsByClassName('button-wrapper')[0])
 }
