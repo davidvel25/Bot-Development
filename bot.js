@@ -28,7 +28,7 @@ const city = "New York City";
 const zipField = "input[id='postalCode']";
 const zip = '10307';
 const stateField = "select[id='state']";
-const state = "New York";
+const state = 'New York';
 
 async function givePage(){ //function givePage: user can interact with
     //headlessTrue means you won't see browser popup aka quicker + you see the BTS
@@ -126,7 +126,6 @@ async function addToCart2(page){
 }
 
 async function fillBilling(page){
-    
     await page.waitFor(1000);     //wait 1 second for the page to fully load
     await page.type(firstNameField, firstName);    //First Name Field
     await page.waitFor(200);     //wait 200 milliseconds for the page to fully load
@@ -145,21 +144,14 @@ async function fillBilling(page){
     const input2 = await page.$(zipField); //indentifies the zip code Field
     await input2.click({clickCount:3}); //clicks the field 3 times to select autofilled zip code based on geolocation
     await input2.type(zip);     //deletes autofilled zip code and replaces with defined zip code
-    await page.waitFor(200);
-    // await page.type("input[id='state']", 'NY');
+    await page.waitFor(200);    //wait 200 milliseconds for the page to fully load
 
-    // await input3.click({clickCount:1});
-    //await page.waitForNavigation();
-    // const input3 = await page.$("button[class='field-input field-input--primary']", elem => elem.click());
-    const input3 = await page.$(stateField);
-    await input3.click();
-    // await page.click("button [data-automation-id='address-form-state']");
-    // await page.waitForSelector("button[class='field-input field-input--primary']");
-    // await page.click("button[class='field-input field-input--primary']", elem => elem.click());
-    await input3.type('New York');
-    await input3.type('\n');
-    const deliveryButton = await page.$(delivery);
-    await deliveryButton.click();
+    const input3 = await page.$(stateField); //locates the state field on the current page
+    await input3.click();   //clicks the stateField button
+    await input3.type(state);   //types out the state's name
+    await input3.type('\n');    //uses the 'new line'/enter key to select state from dropdown
+    const deliveryButton = await page.$(delivery); //identifies the "continue" button on the address page 
+    await deliveryButton.click(); //ready for item to be delivered 
 }
 
 async function checkout(){ //master method that calls everything else
