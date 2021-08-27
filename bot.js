@@ -1,4 +1,4 @@
-//constant variable named puppeteer: puppeteer is installed
+\//constant variable named puppeteer: puppeteer is installed
 const puppeteer = require('puppeteer');
 
 //the url of the product that will the code will redirect page to
