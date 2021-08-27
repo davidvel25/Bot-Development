@@ -8,6 +8,7 @@ const chkt = "button[class='button ios-primary-btn-touch-fix hide-content-max-m 
 const account = "button[data-automation-id='new-guest-continue-button']";
 const shipping = "button[data-automation-id='fulfillment-continue']";
 const delivery = "button[data-automation-id='address-book-action-buttons-on-continue']";
+const confirmAddress = "button[class='button-wrapper']";
 const account2 = 'button m-margin-top width-full button--primary';
 const shipping2 = 'button cxo-continue-btn button--primary';
 const firstNameField = "input[id='firstName']";
@@ -145,8 +146,11 @@ async function fillBilling(page){
     await input3.type('\n');    //uses the 'new line'/enter key to select state from dropdown
     const deliveryButton = await page.$(delivery); //identifies the "continue" button on the address page 
     await deliveryButton.click(); //ready for item to be delivered
-    await page.waitFor(200); //wait 200 milliseconds for page to load
-    await page.evaluate(() => document.getElementsByClassName('button-wrapper')[0].click());
+    await page.waitFor(1500); //wait 200 milliseconds for page to load
+    const button = await page.$(confirmAddress);
+
+    console.log(document.getElementsByClassName('button-wrapper'))
+    console.log(document.getElementsByClassName('button-wrapper')[0])
 }
 
 async function checkout(){ //master method that calls everything else
