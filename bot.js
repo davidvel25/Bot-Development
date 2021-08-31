@@ -27,6 +27,16 @@ const zipField = "input[id='postalCode']";
 const zip = '10012';
 const stateField = "select[id='state']";
 const state = 'New York';
+const creditCardField = '#creditCard';
+const creditCardNum = '4024007103939509';
+const cvvField = '#cvv';
+const cvv = '221';
+const monthField = '#month-chooser';
+const month = '02';
+const yearField = '#year-chooser';
+const year = '2024';
+const completeBilling = "button[class='button spin-button button--primary']";
+const placeOrder = 'button auto-submit-place-order no-margin set-full-width-button pull-right-m place-order-btn btn-block-s button--primary';
 
 async function givePage(){ //function givePage: user can interact with
     //headlessTrue means you won't see browser popup aka quicker + you see the BTS
@@ -155,16 +165,40 @@ async function fillBilling(page){
     // console.log(document.getElementsByClassName('button-wrapper')[0])
 }
 
-async function checkout(){ //master method that calls everything else
+async function fillPayment(page){
+    await page.waitFor(2000); //wait 2 seconds for the page to fully load up
+    await page.type(creditCardField, creditCardNum); //inputs the credit card num into the field
+    await page.waitFor(100); //wait 100 milliseconds for the page to fully load up
+    await page.type(cvvField, cvv); //inputs the cvv into the cvv field
+    await page.waitFor(100); //wait 100 milliseconds for the page to fully load up
+    await page.select(monthField, month); //inputs the month into the month field
+    await page.waitFor(100); //wait 100 milliseconds for the page to fully load up
+    await page.select(yearField, year); //inputs the year into the year field
+    await page.waitFor(100); //wait 100 milliseconds for the page to fully load up
+    await page.click(completeBilling, elem => elem.click()); //clicks the "complete billing" btn
+}
+
+async function submitOrder(page){
+    await page.waitFor(2000); //wait 2 seconds for the page to fully load up
+    await page.evaluate(() => document.getElementsByClassName('button auto-submit-place-order no-margin set-full-width-button pull-right-m place-order-btn btn-block-s button--primary')[0].click()); //clicks the only button on the page with the class name, 'placeOrder'
+}
+
+async function checkout(){ //master method that runs all methods and successfully purchases item
     
-    //create a page object
+    //create a page object to be used as a parameter for purchasing item
     var page = await givePage();
     
-    //add the 'page' object into a function called addToCart as a parameter
+    //runs the addToCart method to add the item to the digital shopping cart
     await addToCart(page);
 
-    //add the 'page' object into a function called fillBilling as a parameter
+    //completes the shipping and delivery information for the item(s) in the shopping cart
     await fillBilling(page);
+
+    //completes the Payment info using the credit card info provided.
+    await fillPayment(page);
+
+    //submits the order to the site (FINAL STEP)
+    await submitOrder(page);
 }
 
 checkout();
